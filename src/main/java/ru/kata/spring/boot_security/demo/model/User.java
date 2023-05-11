@@ -22,19 +22,19 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name =  "lastname")
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name =  "firstname")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name =  "email")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "enabled")
     private boolean enabled = true;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Role> roles = new ArrayList<>();
 
     public Long getId() {

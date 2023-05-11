@@ -43,7 +43,7 @@
     </p>
     <div>Roles:</div>
     <select th:field="*{roles}" multiple>
-        <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}"></option>
+        <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}" selected></option>
     </select>
 
     <button type="submit">SAVE</button>

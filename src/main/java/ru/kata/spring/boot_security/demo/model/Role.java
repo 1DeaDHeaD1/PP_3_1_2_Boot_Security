@@ -15,7 +15,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "authority")
     private String authority;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
