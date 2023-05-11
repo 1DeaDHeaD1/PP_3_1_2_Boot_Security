@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="header" th:align="center">
+    <div  th:if="${#authorization.expression('!isAuthenticated()')}">
+        <a href="/login" th:href="@{/login}">Sign in</a>
+    </div>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a href="/user" th:href="@{/user}">Home</a>
+    </div>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a href="/logout" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
+<header th:replace="include/header :: header"></header>
+<h1><span th:text="${user.username}">User</span>, welcome spring boot security page!</h1>
+<form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
 
+    <input type="hidden" th:field="*{id}"/>
 
+    <p>
+    <div>First Name:</div>
+    <div>
+        <input type="text" th:field="*{firstName}" readonly="readonly"/>
+    </div>
+    </p>
+
+    <p>
+    <div>Last Name:</div>
+    <div>
+        <input type="text" th:field="*{lastName}" readonly="readonly"/>
+    </div>
+    </p>
+
+    <p>
+    <div>Email:</div>
+    <div>
+        <input type="text" th:field="*{email}" readonly="readonly"/>
+    </div>
+    <div>Username:</div>
+    <div>
+        <input type="text" th:field="*{username}" readonly="readonly"/>
+    </div>
+    <!--    <div>Password:</div>-->
+    <div>
+        <input type="hidden" th:field="*{password}"/>
+    </div>
+    <div>Enabled:</div>
+    <div>
+        <input type="checkbox" th:checked="*{enabled}" disabled="disabled"/>
+    </div>
+
+    <div>Roles:</div>
+    <table>
+        <tbody>
+        <tr th:each="row, rowStat : ${user.getAuthorities()}">
+            <td th:text="${rowStat.count}"></td>
+            <td th:text="${row.authority}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    </p>
+
+</form>
+
+<footer th:replace="include/footer :: footer">Footer</footer>
 </body>
 </html>
