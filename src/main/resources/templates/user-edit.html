@@ -4,51 +4,57 @@
 <body>
 <header th:replace="include/header :: header"></header>
 
-<h1>USER EDIT</h1>
-<form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+<div class="row">
+    <sidebar th:replace="include/header :: sidebar"></sidebar>
+    <main class="col-md-10">
 
-    <input type="hidden" th:field="*{id}"/>
+        <h1>USER EDIT</h1>
+        <form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-    <p>
-    <div>First Name:</div>
-    <div>
-        <input type="text" th:field="*{firstName}"/>
-    </div>
-    </p>
+            <input type="hidden" th:field="*{id}"/>
 
-    <p>
-    <div>Last Name:</div>
-    <div>
-        <input type="text" th:field="*{lastName}"/>
-    </div>
-    </p>
+            <p>
+            <div>First Name:</div>
+            <div>
+                <input type="text" th:field="*{firstName}"/>
+            </div>
+            </p>
 
-    <p>
-    <div>Email:</div>
-    <div>
-        <input type="text" th:field="*{email}"/>
-    </div>
-    <div>Username:</div>
-    <div>
-        <input type="text" th:field="*{username}" readonly="readonly"/>
-    </div>
-<!--    <div>Password:</div>-->
-    <div>
-        <input type="hidden" th:field="*{password}"/>
-    </div>
-    <div>Enabled:</div>
-    <div>
-        <input type="checkbox" th:field="*{enabled}"/>
-    </div>
-    </p>
-    <div>Roles:</div>
-    <select th:field="*{roles}" multiple>
-        <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}" selected></option>
-    </select>
+            <p>
+            <div>Last Name:</div>
+            <div>
+                <input type="text" th:field="*{lastName}"/>
+            </div>
+            </p>
 
-    <button type="submit">SAVE</button>
+            <p>
+            <div>Email:</div>
+            <div>
+                <input type="text" th:field="*{email}"/>
+            </div>
+            <div>Username:</div>
+            <div>
+                <input type="text" th:field="*{username}" readonly="readonly"/>
+            </div>
+        <!--    <div>Password:</div>-->
+            <div>
+                <input type="hidden" th:field="*{password}"/>
+            </div>
+            <div>Enabled:</div>
+            <div>
+                <input type="checkbox" th:field="*{enabled}"/>
+            </div>
+            </p>
+            <div>Roles:</div>
+            <select th:field="*{roles}" multiple>
+                <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}" selected></option>
+            </select>
 
-</form>
+            <button type="submit">SAVE</button>
+
+        </form>
+    </main>
+</div>
 
 <footer th:replace="include/footer :: footer"></footer>
 

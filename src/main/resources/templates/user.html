@@ -5,57 +5,62 @@
 </head>
 <body>
 <header th:replace="include/header :: header"></header>
-<h1><span th:text="${user.username}">User</span>, welcome spring boot security page!</h1>
-<form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-    <input type="hidden" th:field="*{id}"/>
+<div class="row">
+    <sidebar th:replace="include/header :: sidebar"></sidebar>
+    <main class="col-md-10">
 
-    <p>
-    <div>First Name:</div>
-    <div>
-        <input type="text" th:field="*{firstName}" readonly="readonly"/>
-    </div>
-    </p>
+        <form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-    <p>
-    <div>Last Name:</div>
-    <div>
-        <input type="text" th:field="*{lastName}" readonly="readonly"/>
-    </div>
-    </p>
+            <input type="hidden" th:field="*{id}"/>
 
-    <p>
-    <div>Email:</div>
-    <div>
-        <input type="text" th:field="*{email}" readonly="readonly"/>
-    </div>
-    <div>Username:</div>
-    <div>
-        <input type="text" th:field="*{username}" readonly="readonly"/>
-    </div>
-    <!--    <div>Password:</div>-->
-    <div>
-        <input type="hidden" th:field="*{password}"/>
-    </div>
-    <div>Enabled:</div>
-    <div>
-        <input type="checkbox" th:checked="*{enabled}" disabled="disabled"/>
-    </div>
+            <p>
+            <div>First Name:</div>
+            <div>
+                <input type="text" th:field="*{firstName}" readonly="readonly"/>
+            </div>
+            </p>
 
-    <div>Roles:</div>
-    <table>
-        <tbody>
-        <tr th:each="row, rowStat : ${user.getAuthorities()}">
-            <td th:text="${rowStat.count}"></td>
-            <td th:text="${row.authority}"></td>
-        </tr>
-        </tbody>
-    </table>
+            <p>
+            <div>Last Name:</div>
+            <div>
+                <input type="text" th:field="*{lastName}" readonly="readonly"/>
+            </div>
+            </p>
 
-    </p>
+            <p>
+            <div>Email:</div>
+            <div>
+                <input type="text" th:field="*{email}" readonly="readonly"/>
+            </div>
+            <div>Username:</div>
+            <div>
+                <input type="text" th:field="*{username}" readonly="readonly"/>
+            </div>
+            <!--    <div>Password:</div>-->
+            <div>
+                <input type="hidden" th:field="*{password}"/>
+            </div>
+            <div>Enabled:</div>
+            <div>
+                <input type="checkbox" th:checked="*{enabled}" disabled="disabled"/>
+            </div>
 
-</form>
+            <div>Roles:</div>
+            <table>
+                <tbody>
+                <tr th:each="row, rowStat : ${user.getAuthorities()}">
+                    <td th:text="${rowStat.count}"></td>
+                    <td th:text="${row.authority}"></td>
+                </tr>
+                </tbody>
+            </table>
 
+            </p>
+
+        </form>
+    </main>
+</div>
 <footer th:replace="include/footer :: footer">Footer</footer>
 </body>
 </html>
