@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<body>
+
+<div th:fragment="user-info-modal" class="modal fade" id="userInfoModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userInfoModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="" id="userInfoForm" th:object="${editUser}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="editId">ID</label>
+                            <input type="text" class="form-control" id="editId" th:field="*{id}" value="" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFirstname">First Name</label>
+                            <input type="text" class="form-control" id="editFirstname" th:field="*{firstName}"
+                                   placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editLastname">Surname</label>
+                            <input type="text" class="form-control" id="editLastname" th:field="*{lastName}"
+                                   placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" name="email" class="form-control" id="editEmail" th:field="*{email}"
+                                   placeholder="name@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editUsername">Username</label>
+                            <input type="text" class="form-control" id="editUsername" th:field="*{username}"
+                                   placeholder="username" readonly>
+                        </div>
+                        <div class="form-group" hidden="hidden">
+                            <label for="editPassword">Password</label>
+                            <input type="text" class="form-control" id="editPassword" th:field="*{password}"
+                                   placeholder="Last name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEnabled">Enabled</label>
+                            <input class="form-control form-check-input" type="checkbox" id="editEnabled"
+                                   th:field="*{enabled}" value="false" placeholder="Last name" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editRoles">Roles</label>
+                            <select class="form-control" id="editRoles" name="roles" th:field="*{roles}" multiple>
+                                <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}"></option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                        <button id="saveModalButton" class="btn btn-primary" data-bs-dismiss="modal" type="submit">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

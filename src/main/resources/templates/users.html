@@ -20,7 +20,7 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="nav-users">
-                <table class="table table-striped table-hover caption-top">
+                <table class="table table-striped table-hover caption-top" id="usersList">
                     <caption class="p-2 text-dark fs-4">All users</caption>
                     <thead>
                         <tr class="border-top border-dark">
@@ -29,7 +29,8 @@
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Username</th>
-                            <th hidden="hidden">Enabled</th>
+                            <th hidden="hidden">Password</th>
+                            <th>Enabled</th>
                             <th>Roles</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -43,21 +44,20 @@
                             <td th:text="${user.lastName}"></td>
                             <td th:text="${user.email}"></td>
                             <td th:text="${user.username}"></td>
-                            <td hidden="hidden">
+                            <td th:text="${user.password}" hidden="hidden"></td>
+                            <td>
                                 <input type="checkbox" th:checked="${user.enabled}" disabled="disabled"/>
                             </td>
                             <td>
                                 <p th:text="${#strings.listJoin(user.roles.![authority], ' ')} "></p>
                             </td>
                             <td>
-                                <form th:action="@{/admin/users/edit/{id}(id=${user.id})}">
-                                    <button class="btn btn-primary">Edit</button>
-                                </form>
+                                <button class="btn btn-primary" id="editUserButton" data-bs-toggle="modal" data-bs-target="#userInfoModal">Edit</button>
                             </td>
                             <td>
-                                <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+<!--                                <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post">-->
+                                    <button class="btn btn-danger" id="deleteUserButton" data-bs-toggle="modal" data-bs-target="#userInfoModal">Delete</button>
+<!--                                </form>-->
                             </td>
                         </tr>
                     </th:block>
@@ -114,6 +114,8 @@
         </div>
     </main>
 </div>
+
+<div th:replace="include/user-edit :: user-info-modal"></div>
 
 <footer th:replace="include/footer :: footer"></footer>
 
