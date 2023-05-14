@@ -9,56 +9,37 @@
 <div class="row">
     <sidebar th:replace="include/header :: sidebar"></sidebar>
     <main class="col-md-10">
-
-        <form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
-
-            <input type="hidden" th:field="*{id}"/>
-
-            <p>
-            <div>First Name:</div>
-            <div>
-                <input type="text" th:field="*{firstName}" readonly="readonly"/>
-            </div>
-            </p>
-
-            <p>
-            <div>Last Name:</div>
-            <div>
-                <input type="text" th:field="*{lastName}" readonly="readonly"/>
-            </div>
-            </p>
-
-            <p>
-            <div>Email:</div>
-            <div>
-                <input type="text" th:field="*{email}" readonly="readonly"/>
-            </div>
-            <div>Username:</div>
-            <div>
-                <input type="text" th:field="*{username}" readonly="readonly"/>
-            </div>
-            <!--    <div>Password:</div>-->
-            <div>
-                <input type="hidden" th:field="*{password}"/>
-            </div>
-            <div>Enabled:</div>
-            <div>
-                <input type="checkbox" th:checked="*{enabled}" disabled="disabled"/>
-            </div>
-
-            <div>Roles:</div>
-            <table>
-                <tbody>
-                <tr th:each="row, rowStat : ${user.getAuthorities()}">
-                    <td th:text="${rowStat.count}"></td>
-                    <td th:text="${row.authority}"></td>
+        <h1>User information page</h1>
+        <table class="table table-striped" id="usersList">
+            <thead>
+                <tr class="border-top border-dark">
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th hidden="hidden">Password</th>
+                    <th>Enabled</th>
+                    <th>Roles</th>
                 </tr>
-                </tbody>
-            </table>
-
-            </p>
-
-        </form>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${#authentication.principal.id}"></td>
+                    <td th:text="${#authentication.principal.firstName}"></td>
+                    <td th:text="${#authentication.principal.lastName}"></td>
+                    <td th:text="${#authentication.principal.email}"></td>
+                    <td th:text="${#authentication.principal.username}"></td>
+                    <td th:text="${#authentication.principal.password}" hidden="hidden"></td>
+                    <td>
+                        <input type="checkbox" th:checked="${#authentication.principal.enabled}" disabled="disabled"/>
+                    </td>
+                    <td>
+                        <p th:text="${#strings.listJoin(#authentication.principal.roles.![authority], ' ')} "></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </main>
 </div>
 <footer th:replace="include/footer :: footer">Footer</footer>

@@ -55,9 +55,7 @@
                                 <button class="btn btn-primary" id="editUserButton" data-bs-toggle="modal" data-bs-target="#userInfoModal">Edit</button>
                             </td>
                             <td>
-<!--                                <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post">-->
-                                    <button class="btn btn-danger" id="deleteUserButton" data-bs-toggle="modal" data-bs-target="#userInfoModal">Delete</button>
-<!--                                </form>-->
+                                <button class="btn btn-danger" id="deleteUserButton" data-bs-toggle="modal" data-bs-target="#userInfoModal">Delete</button>
                             </td>
                         </tr>
                     </th:block>
@@ -73,27 +71,27 @@
 
                         <div class="form-label">First Name:</div>
                         <div>
-                            <input class="form-control" type="text" th:field="*{firstName}"/>
+                            <input class="form-control" type="text" th:field="*{firstName}" placeholder="First name"/>
                         </div>
 
                         <div class="form-label">Last Name:</div>
                         <div>
-                            <input class="form-control" type="text" th:field="*{lastName}"/>
+                            <input class="form-control" type="text" th:field="*{lastName}" placeholder="Last name"/>
                         </div>
 
                         <div class="form-label">Email:</div>
                         <div>
-                            <input class="form-control" type="text" th:field="*{email}"/>
+                            <input class="form-control" type="text" th:field="*{email}" placeholder="example@example.com"/>
                         </div>
 
                         <div class="form-label">Username:</div>
                         <div>
-                            <input class="form-control" type="text" th:field="*{username}"/>
+                            <input class="form-control" type="text" th:field="*{username}" placeholder="username"/>
                         </div>
 
                         <div class="form-label">Password:</div>
                         <div>
-                            <input class="form-control" type="text" th:field="*{password}"/>
+                            <input class="form-control" type="password" th:field="*{password}" placeholder="Password"/>
                         </div>
 
                         <div class="form-label">Enabled:</div>
