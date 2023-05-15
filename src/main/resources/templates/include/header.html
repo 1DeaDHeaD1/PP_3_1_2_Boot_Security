@@ -2,16 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-<div th:fragment="header" th:align="center">
-    <div  th:if="${#authorization.expression('!isAuthenticated()')}">
-        <a href="/login" th:href="@{/login}">Sign in</a>
-    </div>
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <a href="/user" th:href="@{/user}">Home</a>
-    </div>
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <a href="/logout" th:href="@{/logout}">Logout</a>
-    </div>
+<div th:fragment="header">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <nav class="navbar bg-dark navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/user" th:href="@{/user}"
+               th:if="${#authorization.expression('isAuthenticated()')}"
+               th:text="|${#authentication.getPrincipal().username}"
+            ></a>
+            <span class="navbar-text text-primary">with roles: </span>
+            <span class="navbar-text text-primary"  th:each="auth : ${#authentication.getAuthorities()}" th:text="'&nbsp;' + ${auth.authority}"></span>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarTop"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarTop">
+                <ul class="navbar-nav">
+                    <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a class="nav-link" href="/logout" th:href="@{/logout}">Logout</a>
+                    </li>
+                    <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
+                        <a class="nav-link" href="/login" th:href="@{/login}">Sign in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </div>
+
+<sidebar class="col-md-2" th:fragment="sidebar">
+    <link href="../static/css/sidebar.css" rel="stylesheet" th:href="@{/css/sidebar.css}"/>
+
+    <div class="navbar navbar-expand-md d-flex">
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center flex-column" id="navbarCollapse">
+            <div class="navbar-side w-100"
+                 th:if="${#authorization.expression('hasAuthority( T(ru.kata.spring.boot_security.demo.constant.RoleConst).ADMIN.getTitle() )')}"
+            >
+                <a class="nav-link" href="/admin" th:href="@{/admin}">Admin</a>
+            </div>
+            <div class="navbar-side  w-100" th:if="${#authorization.expression('isAuthenticated()')}">
+                <a class="nav-link" href="/user" th:href="@{/user}">User</a>
+            </div>
+        </div>
+    </div>
+</sidebar>
+
 </body>
 </html>
