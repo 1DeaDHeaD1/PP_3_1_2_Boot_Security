@@ -36,31 +36,25 @@ public class AdminController {
         return "users";
     }
 
-    @PostMapping(value = {"", "/users"})
-    public String createUser(ModelMap model, @ModelAttribute("user") User user) {
-        userService.add(user);
-        return "redirect:/admin/users";
-    }
-
-    @PostMapping(value = {"/delete/{id}","/users/delete/{id}"})
-    public String deleteUser(ModelMap model, @PathVariable("id") long id) {
-        userService.deleteUserById(id);
-        model.addAttribute("users", userService.listUsers());
-        return "redirect:/admin/users";
-    }
-
-//    @GetMapping(value = "admin/users/edit/{id}")
-//    public String getUser(ModelMap model, @PathVariable("id") long id) {
-//        model.addAttribute("user", userService.findUserById(id));
-//        return "user-edit";
+//    @PostMapping(value = {"", "/users"})
+//    public String createUser(ModelMap model, @ModelAttribute("user") User user) {
+//        userService.add(user);
+//        return "redirect:/admin/users";
 //    }
-
-    @PostMapping(value = {"/edit/{id}","/users/edit/{id}"})
-    public String editUser(ModelMap model, @ModelAttribute("editUser") User user) {
-        userService.updateUser(user);
-        model.addAttribute("users", userService.listUsers());
-        return "redirect:/admin/users";
-    }
+//
+//    @PostMapping(value = {"/delete/{id}","/users/delete/{id}"})
+//    public String deleteUser(ModelMap model, @PathVariable("id") long id) {
+//        userService.deleteUserById(id);
+//        model.addAttribute("users", userService.listUsers());
+//        return "redirect:/admin/users";
+//    }
+//
+//    @PostMapping(value = {"/edit/{id}","/users/edit/{id}"})
+//    public String editUser(ModelMap model, @ModelAttribute("editUser") User user) {
+//        userService.updateUser(user);
+//        model.addAttribute("users", userService.listUsers());
+//        return "redirect:/admin/users";
+//    }
 
     @PostConstruct
     private void init() {

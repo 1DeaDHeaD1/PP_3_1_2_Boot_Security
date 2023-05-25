@@ -64,7 +64,7 @@
             </div>
 
             <div class="tab-pane fade" id="nav-newuser">
-                <form class="bg-white d-flex justify-content-center" action="/admin/users" th:object="${newUser}" method="post">
+                <form class="bg-white d-flex justify-content-center" id="createUserForm" th:object="${newUser}" method="post">
                     <fieldset class="col-4 text-center fw-bold">
                         <legend>Add new user</legend>
                         <input type="hidden" th:field="*{id}"/>
@@ -105,7 +105,7 @@
                                 <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role}"></option>
                             </select>
                         </div>
-                        <button class="btn btn-success">Add new user</button>
+                        <button id="createUserButton" class="btn btn-success">Add new user</button>
                     </fieldset>
                 </form>
             </div>
@@ -118,4 +118,6 @@
 <footer th:replace="include/footer :: footer"></footer>
 
 </body>
+
+<script src="../js/datatables.min.js"></script>
 </html>

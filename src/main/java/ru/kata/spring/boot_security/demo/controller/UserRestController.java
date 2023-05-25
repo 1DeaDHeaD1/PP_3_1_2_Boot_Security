@@ -6,30 +6,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-@Controller
-public class UserController {
+@RestController
+@RequestMapping("/api")
+public class UserRestController {
 
     private final UserService userService;
 
     @Autowired
-    public UserController(final UserService userService) {
+    public UserRestController(final UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
-    public String printWelcome() {
-        return "index";
-    }
-
     @GetMapping(value = "/user")
-    public String getUser(ModelMap model) {
+    public User getUser() {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) userService.loadUserByUsername(loggedInUser.getName());
-        model.addAttribute("user", user);
-        return "user";
+       return (User) userService.loadUserByUsername(loggedInUser.getName());
     }
 
 }

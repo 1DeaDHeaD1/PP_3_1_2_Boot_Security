@@ -17,7 +17,7 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="editId">ID</label>
-                            <input type="text" class="form-control" id="editId" th:field="*{id}" value="" disabled>
+                            <input type="text" class="form-control" id="editId" th:field="*{id}" value="" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label for="editFirstname">First Name</label>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="editEnabled">Enabled</label>
                             <input class="form-control form-check-input" type="checkbox" id="editEnabled"
-                                   th:field="*{enabled}" value="false" placeholder="Last name" readonly>
+                                   th:field="*{enabled}" placeholder="Last name">
                         </div>
 
                         <div class="form-group">
@@ -60,8 +60,11 @@
                     </fieldset>
                     <div class="modal-footer">
                         <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
-                        <button id="saveModalButton" class="btn btn-primary" data-bs-dismiss="modal" type="submit">
+                        <button id="saveModalButton" class="btn btn-primary" data-bs-dismiss="modal" type="submit" disabled="disabled" hidden="hidden">
                             Save changes
+                        </button>
+                        <button id="deleteModalButton" class="btn btn-danger" data-bs-dismiss="modal" type="button" hidden="hidden">
+                            DELETE
                         </button>
                     </div>
                 </form>
